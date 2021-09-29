@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 class Userprofile extends Component {
   construtor() {
-      super()
+    super();
     this.state = {
       loggedIn: true,
     };
