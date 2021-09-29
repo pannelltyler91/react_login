@@ -5,7 +5,7 @@ class Employeelogout extends Component {
     return (
       <div>
         <h1>You are logged out!</h1>
-        <a href="/employeelogin">Return to Login</a>
+        <a href="/employee/login">Return to Login</a>
       </div>
     );
   }

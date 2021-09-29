@@ -16,8 +16,13 @@ class Employeeregister extends Component {
     let data = {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
+      name:e.target.user_name.value,
+      phone:e.target.user_phone.value,
+      address:e.target.user_address.value,
+      employeeid:e.target.user_id.value,
+      salary:e.target.user_salary.value
     };
-    fetch("http://localhost:3001/api/register", {
+    fetch("http://localhost:3001/api/employee/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +42,7 @@ class Employeeregister extends Component {
     const { registered } = this.state;
 
     if (registered) {
-      return <Redirect to="/employeelogin" />;
+      return <Redirect to="/employee/login" />;
     }
     return (
       <div>
@@ -50,6 +55,16 @@ class Employeeregister extends Component {
             <Form.Control type="email" name="user_email" ></Form.Control>
             <h4>Password:</h4>
             <input type="password" name="user_password"></input>
+            <h4>Name:</h4>
+            <input type="text" name="user_name"></input>
+            <h4>Address:</h4>
+            <input type="text" name="user_address"></input>
+            <h4>Phone:</h4>
+            <input type="text" name="user_phone"></input>
+            <h4>Employee Id:</h4>
+            <input type="text" name="user_id"></input>
+            <h4>Salary:</h4>
+            <input type="number" name="user_salary"></input>
             <br></br>
             <br></br>
             <Button variant="primary" type="submit">Register</Button>

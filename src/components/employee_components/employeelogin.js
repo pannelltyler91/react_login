@@ -16,7 +16,7 @@ class Employeelogin extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    fetch("http://localhost:3001/api/login", {
+    fetch("http://localhost:3001/api/employee/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class Employeelogin extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/employeeprofile" />;
+      return <Redirect to="/employee/profile" />;
     }
     return (
       <div>

@@ -16,7 +16,7 @@ class Adminlogin extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    fetch("http://localhost:3001/api/login", {
+    fetch("http://localhost:3001/api/admin/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

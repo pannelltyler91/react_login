@@ -17,7 +17,7 @@ class Adminregister extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    fetch("http://localhost:3001/api/register", {
+    fetch("http://localhost:3001/api/admin/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

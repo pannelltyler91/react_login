@@ -16,7 +16,7 @@ class Employeeprofile extends Component {
     const { loggedIn } = this.state;
 
     if (!loggedIn) {
-      return <Redirect to="/employeelogout" />;
+      return <Redirect to="/employee/logout" />;
     }
     return (
       <div>

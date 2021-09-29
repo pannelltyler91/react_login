@@ -24,20 +24,22 @@ class App extends Component {
     return (
       <Router>
         <div className="navbar">
-        <NavLink to="/adminlogin">Admin Login</NavLink> |{" "}
-        <NavLink to="/employeelogin"> Employee Login</NavLink> |{" "}
+        <NavLink to="/admin/login">Admin Login</NavLink> |{" "}
+        <NavLink to="/employee/login"> Employee Login</NavLink> |{" "}
         <NavLink to="/client/login"> Client Login</NavLink> |{" "}
         <NavLink to="/client/register"> Client Register</NavLink> |{" "}
+
+        <NavLink to="/employee/register"> Employee Register</NavLink> |{" "}
         </div>
         <Switch>
-          <Route path="/adminlogin" component={Adminlogin}></Route>
-          <Route path="/adminregister" component={Adminregister}></Route>
-          <Route path="/adminprofile" component={Adminprofile}></Route>
-          <Route path="/adminlogout" component={Adminlogout}></Route>
-          <Route path="/employeelogin" component={Employeelogin}></Route>
-          <Route path="/employeeregister" component={Employeeregister}></Route>
-          <Route path="/employeeprofile" component={Employeeprofile}></Route>
-          <Route path="/employeelogout" component={Employeelogout}></Route>
+          <Route path="/admin/login" component={Adminlogin}></Route>
+          <Route path="/admin/register" component={Adminregister}></Route>
+          <Route path="/admin/profile" component={Adminprofile}></Route>
+          <Route path="/admin/logout" component={Adminlogout}></Route>
+          <Route path="/employee/login" component={Employeelogin}></Route>
+          <Route path="/employee/register" component={Employeeregister}></Route>
+          <Route path="/employee/profile" component={Employeeprofile}></Route>
+          <Route path="/employee/logout" component={Employeelogout}></Route>
           <Route path="/client/login" component={Clientlogin}></Route>
           <Route path="/client/register" component={Clientregister}></Route>
           <Route path="/client/profile" component={Clientprofile}></Route>

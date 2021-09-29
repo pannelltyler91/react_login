@@ -13,7 +13,7 @@ app.use(
 );
 app.use(cors());
 
-app.post("/api/register", (req, res) => {
+app.post("/api/admin/register", (req, res) => {
   db.user.findAll({
       where: {
         user_email: req.body.email,
@@ -35,7 +35,7 @@ app.post("/api/register", (req, res) => {
     });
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/api/admin/login", (req, res) => {
   // console.log('logged in')
   // console.log(req.body)
   // res.json({})
@@ -59,6 +59,61 @@ app.post("/api/login", (req, res) => {
       }
     });
 });
+
+app.post('/api/employee/register', (req,res) =>{
+    // console.log(req.body)
+    // console.log('route is working!')
+    // res.send({})
+    db.employees.findAll({
+        where: {
+          emp_email: req.body.email,
+        },
+      })
+      .then((employees) => {
+        if (employees.length == 0) {
+          const passwordHash = bcrypt.hashSync(req.body.password, 10);
+          db.employees.create({
+              emp_email: req.body.email,
+              emp_password: passwordHash,
+              emp_name:req.body.name,
+              address:req.body.address,
+              phone:req.body.phone,
+              emp_id:req.body.employeeid,
+              salary:req.body.salary
+            })
+            .then(() => {
+              res.json({ isRegistered: true });
+            });
+        } else {
+          res.status(409).json({ error: "User already exists!", isRegistered: false });
+        }
+      });
+})
+
+app.post("/api/employee/login", (req, res) => {
+    // console.log('logged in')
+    // console.log(req.body)
+    // res.json({})
+    db.employees.findAll({
+        where: {
+          emp_email: req.body.email,
+        },
+      })
+      .then((employees) => {
+        if (employees.length > 0) {
+          let employee = employees[0];
+          let passwordHash = employee.emp_password;
+  
+          if (bcrypt.compareSync(req.body.password, passwordHash)) {
+            res.json({ isLoggedIn: true });
+          } else {
+            res.status(403).json({ error: "Password is incorrect", isLoggedIn: false });
+          }
+        } else {
+          res.status(404).json({ error: "User does not exist", isLoggedIn: false });
+        }
+      });
+  });
 
 app.listen(3001, () => {
   console.log("App is listening on localhost:3001");
