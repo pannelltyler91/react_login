@@ -1,5 +1,8 @@
 import { React, Component } from "react";
 import { Redirect } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 class Register extends Component {
   constructor() {
@@ -41,19 +44,21 @@ class Register extends Component {
         <div className="title">
           <h2>Register</h2>
         </div>
-        <div className="form_container">
-          <form onSubmit={this._handleclick}>
+        <Container>
+          <Form onSubmit={this._handleclick}>
             <h4>Email:</h4>
-            <input type="email" name="user_email" id="user_email"></input>
+            <Form.Control type="email" name="user_email" id="user_email"></Form.Control>
             <h4>Password:</h4>
             <input
               type="password"
               name="user_password"
               id="user_password"
             ></input>
-            <input type="submit" id="register_submit" value="Register"></input>
-          </form>
-        </div>
+            <br></br>
+            <br></br>
+            <Button variant="primary" type="submit">Register</Button>
+          </Form>
+        </Container>
       </div>
     );
   }
