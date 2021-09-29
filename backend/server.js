@@ -14,8 +14,7 @@ app.use(
 app.use(cors());
 
 app.post("/api/register", (req, res) => {
-  db.user
-    .findAll({
+  db.user.findAll({
       where: {
         user_email: req.body.email,
       },
@@ -23,8 +22,7 @@ app.post("/api/register", (req, res) => {
     .then((users) => {
       if (users.length == 0) {
         const passwordHash = bcrypt.hashSync(req.body.password, 10);
-        db.user
-          .create({
+        db.user.create({
             user_email: req.body.email,
             user_password: passwordHash,
           })
@@ -32,9 +30,7 @@ app.post("/api/register", (req, res) => {
             res.json({ isRegistered: true });
           });
       } else {
-        res
-          .status(409)
-          .json({ error: "User already exists!", isRegistered: false });
+        res.status(409).json({ error: "User already exists!", isRegistered: false });
       }
     });
 });
@@ -43,8 +39,7 @@ app.post("/api/login", (req, res) => {
   // console.log('logged in')
   // console.log(req.body)
   // res.json({})
-  db.user
-    .findAll({
+  db.user.findAll({
       where: {
         user_email: req.body.email,
       },
@@ -57,14 +52,10 @@ app.post("/api/login", (req, res) => {
         if (bcrypt.compareSync(req.body.password, passwordHash)) {
           res.json({ isLoggedIn: true });
         } else {
-          res
-            .status(403)
-            .json({ error: "Password is incorrect", isLoggedIn: false });
+          res.status(403).json({ error: "Password is incorrect", isLoggedIn: false });
         }
       } else {
-        res
-          .status(404)
-          .json({ error: "User does not exist", isLoggedIn: false });
+        res.status(404).json({ error: "User does not exist", isLoggedIn: false });
       }
     });
 });
