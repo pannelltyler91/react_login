@@ -1,15 +1,22 @@
 import { React, Component } from "react";
+import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
-  handleclick = (e) => {
+  constructor(){
+    super()
+    this.state={
+      isLoggedIn:false
+    }
+  }
+  _handleclick = (e) => {
     e.preventDefault();
     let data = {
-      password: e.target.previousElementSibling.value,
+      password: e.target.user_password.value,
       email:
-        e.target.previousElementSibling.previousElementSibling
-          .previousElementSibling.value,
+        e.target.user_email.value,
     };
-    fetch("http://localhost:3001/login", {
+    console.log(data)
+    fetch("http://localhost:3001/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +25,10 @@ class Login extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        console.log("Message:", data.isLoggedIn);
+        if(data.isLoggedIn){
+          this.setState({isLoggedIn:true})
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -26,16 +36,23 @@ class Login extends Component {
   };
 
   render() {
+    const { isLoggedIn } = this.state;
+
+    if (isLoggedIn) {
+      return <Redirect to='/userProfile'/>;
+    }
     return (
-      <div className="container">
+      <div>
         <h2>Login</h2>
-        <form>
+      <div className="form_container">
+        <form onSubmit={this._handleclick}>
           <h4>Email:</h4>
           <input type="email" name="user_email" id="user_login_email"></input>
           <h4>Password:</h4>
           <input type="password" name="user_password" id="user_login_password"></input>
-          <input type="submit" id="login_submit" onClick={this._handleclick} value="Login"></input>
+          <input type="submit" id="login_submit"  value="Login"></input>
         </form>
+      </div>
       </div>
     );
   }

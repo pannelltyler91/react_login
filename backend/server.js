@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const db = require('./models')
 const bcrypt = require('bcrypt');
+const { useReducer } = require('react');
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -10,7 +11,7 @@ app.use(express.urlencoded({
 }))
 app.use(cors());
 
-app.post('/register', (req,res) =>{
+app.post('/api/register', (req,res) =>{
   db.user.findAll ({
       where:{
           user_email:req.body.email
@@ -22,23 +23,41 @@ app.post('/register', (req,res) =>{
               user_email:req.body.email,
               user_password:passwordHash
           }).then(() =>{
-              res.json({message:'User Registered'})
+              res.json({isRegistered:true})
           })
       }else{
-          res.status(409).json({error:'User already exists!'})
+          res.status(409).json({error:'User already exists!',isRegistered:false})
       }
   })
 })
 
-app.post('/login', (req,res) =>{
-    console.log('logged in')
-    consol.log(req.body)
-    res.json({})
+app.post('/api/login', (req,res) =>{
+    // console.log('logged in')
+    // console.log(req.body)
+    // res.json({})
+    db.user.findAll({
+        where:{
+           user_email:req.body.email 
+        }
+    }).then((users) =>{
+        if(users.length > 0 ){
+            let user = users[0];
+            let passwordHash = users[0].user_password;
+
+            if(bcrypt.compareSync(req.body.password,passwordHash)){
+                res.json({isLoggedIn:true})
+                
+            }else{
+                res.status(403).json({error:'Password is incorrect', isLoggedIn:false})
+            }
+
+        }else{
+            res.status(404).json({error:'User does not exist', isLoggedIn:false})
+        }
+    })
 })
 
-app.get("/*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-})
+
 
 
 
