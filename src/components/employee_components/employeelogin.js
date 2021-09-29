@@ -1,9 +1,9 @@
-import { React, Component } from "react";
+import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 
-class Login extends Component {
+class Employeelogin extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,17 +39,17 @@ class Login extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/userProfile" />;
+      return <Redirect to="/employeeprofile" />;
     }
     return (
       <div>
-        <h2>Login</h2>
+        <h2>Employee Login</h2>
         <Container>
           <Form onSubmit={this._handleclick}>
             <h4>Email:</h4>
-            <input type="email" name="user_email" id="user_login_email"></input>
+            <input type="email" name="user_email" ></input>
             <h4>Password:</h4>
-            <input type="password" name="user_password"id="user_login_password"></input>
+            <input type="password" name="user_password"></input>
             <br></br>
             <br></br>
             <input type="submit" id="login_submit" value="Login"></input>
@@ -60,4 +60,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Employeelogin;

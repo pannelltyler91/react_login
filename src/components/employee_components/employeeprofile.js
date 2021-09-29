@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-class Userprofile extends Component {
+class Employeeprofile extends Component {
   _handleLogout = (e) => {
     this.setState({ loggedIn: false });
   };
@@ -16,15 +16,15 @@ class Userprofile extends Component {
     const { loggedIn } = this.state;
 
     if (!loggedIn) {
-      return <Redirect to="/logout" />;
+      return <Redirect to="/employeelogout" />;
     }
     return (
       <div>
-        <h1>User Profile</h1>
+        <h1>Employee Profile</h1>
         <button onClick={this._handleLogout}>Log Out</button>
       </div>
     );
   }
 }
 
-export default Userprofile;
+export default Employeeprofile;
