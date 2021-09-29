@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 
+
 class Clientprofile extends Component {
   _handleLogout = (e) => {
     this.setState({ loggedIn: false });
@@ -16,11 +17,12 @@ class Clientprofile extends Component {
     const { loggedIn } = this.state;
 
     if (!loggedIn) {
-      return <Redirect to="/clientlogout" />;
+      return <Redirect to="/client/logout" />;
     }
     return (
       <div>
         <h1>Client Profile</h1>
+        
         <button onClick={this._handleLogout}>Log Out</button>
       </div>
     );

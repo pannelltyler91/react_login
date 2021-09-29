@@ -39,7 +39,7 @@ class Adminlogin extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/adminprofile" />;
+      return <Redirect to="/admin/profile" />;
     }
     return (
       <div>

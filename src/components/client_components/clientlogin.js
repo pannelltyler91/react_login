@@ -16,7 +16,7 @@ class Clientlogin extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    fetch("http://localhost:3001/api/login", {
+    fetch("http://localhost:3001/api/client/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class Clientlogin extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/clientprofile" />;
+      return <Redirect to="/client/profile" />;
     }
     return (
       <div>

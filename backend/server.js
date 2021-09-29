@@ -90,7 +90,7 @@ app.post('/api/employee/register', (req,res) =>{
       });
 })
 
-app.post("/api/employee/login", (req, res) => {
+app.post('/api/employee/login', (req, res) => {
     // console.log('logged in')
     // console.log(req.body)
     // res.json({})
@@ -103,6 +103,60 @@ app.post("/api/employee/login", (req, res) => {
         if (employees.length > 0) {
           let employee = employees[0];
           let passwordHash = employee.emp_password;
+  
+          if (bcrypt.compareSync(req.body.password, passwordHash)) {
+            res.json({ isLoggedIn: true });
+          } else {
+            res.status(403).json({ error: "Password is incorrect", isLoggedIn: false });
+          }
+        } else {
+          res.status(404).json({ error: "User does not exist", isLoggedIn: false });
+        }
+      });
+  });
+
+  app.post('/api/client/register', (req,res)=>{
+    //   console.log('route is working')
+    //   console.log(req.body)
+    //   res.json({})
+    db.clients.findAll({
+        where: {
+          client_email: req.body.email,
+        },
+      })
+      .then((clients) => {
+        if (clients.length == 0) {
+          const passwordHash = bcrypt.hashSync(req.body.password, 10);
+          db.clients.create({
+              client_email: req.body.email,
+              client_password: passwordHash,
+              first_name:req.body.first_name,
+              last_name:req.body.last_name,
+              address:req.body.address,
+              phone:req.body.phone
+            })
+            .then(() => {
+              res.json({ isRegistered: true });
+            });
+        } else {
+          res.status(409).json({ error: "User already exists!", isRegistered: false });
+        }
+      });
+  })
+
+  app.post('/api/client/login', (req, res) => {
+    // console.log('logged in')
+    // console.log(req.body)
+    // res.json({})
+    db.clients.findAll({
+        where: {
+          client_email: req.body.email,
+        },
+      })
+      .then((clients) => {
+        if (clients.length > 0) {
+          let client = clients[0];
+          let passwordHash = client.client_password;
   
           if (bcrypt.compareSync(req.body.password, passwordHash)) {
             res.json({ isLoggedIn: true });
