@@ -14,7 +14,6 @@ class Login extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    console.log(data);
     fetch("http://localhost:3001/api/login", {
       method: "POST",
       headers: {
@@ -24,7 +23,7 @@ class Login extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Message:", data.isLoggedIn);
+        // console.log("Message:", data.isLoggedIn);
         if (data.isLoggedIn) {
           this.setState({ isLoggedIn: true });
         }

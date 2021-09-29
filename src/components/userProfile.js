@@ -2,21 +2,20 @@ import { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 class Userprofile extends Component {
-  construtor() {
+  _handleLogout = (e) => {
+    this.setState({ loggedIn: false });
+  };
+  constructor() {
     super();
     this.state = {
       loggedIn: true,
     };
   }
-  _handleLogout = (e) => {
-    console.log(this.state.loggedIn);
-    this.setState({ loggedIn: false });
-    console.log(this.state.loggedIn);
-  };
-  render() {
-    // const { loggedIn } = this.state;
 
-    if (!this.state.loggedIn) {
+  render() {
+    const { loggedIn } = this.state;
+
+    if (!loggedIn) {
       return <Redirect to="/logout" />;
     }
     return (
