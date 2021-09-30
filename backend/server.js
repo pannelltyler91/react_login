@@ -176,6 +176,42 @@ app.get('/api/employees', (req,res) =>{
     })
 })
 
+app.get('/api/employee/:id', (req,res) =>{
+    // console.log('route is working')
+    // console.log(req.params.id)
+    // res.json({})
+    db.employees.findAll({
+        where:{
+            emp_id:req.params.id
+        }
+    }).then((employee) =>{
+        res.json({employee:employee})
+    })
+})
+
+app.put('/api/employee/:id', (req,res) =>{
+    console.log('route working')
+    console.log(req.params.id)
+    console.log(req.body)
+})
+
+app.delete('/api/employee/:id', (req,res) =>{
+    // console.log('route working')
+    // console.log(req.params.id)
+    // res.json({})
+    db.employees.destroy(
+        {
+            where:{
+                emp_id:req.params.id
+            }
+        }
+    ).then((result) =>{
+        res.json({message:result})
+    })
+})
+
+
+
 
 app.listen(3001, () => {
   console.log("App is listening on localhost:3001");
