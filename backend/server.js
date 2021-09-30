@@ -115,7 +115,7 @@ app.post('/api/employee/login', (req, res) => {
       });
   });
 
-  app.post('/api/client/register', (req,res)=>{
+    app.post('/api/client/register', (req,res)=>{
     //   console.log('route is working')
     //   console.log(req.body)
     //   res.json({})
@@ -168,6 +168,14 @@ app.post('/api/employee/login', (req, res) => {
         }
       });
   });
+  
+app.get('/api/employees', (req,res) =>{
+    db.employees.findAll().then((employees)=>{
+        console.log(employees)
+        res.json({employees:employees})
+    })
+})
+
 
 app.listen(3001, () => {
   console.log("App is listening on localhost:3001");
