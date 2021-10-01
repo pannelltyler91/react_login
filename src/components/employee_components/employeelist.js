@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import Container from 'react-bootstrap/Container'
 
 
 class Employeelist extends Component{
@@ -13,8 +14,6 @@ class Employeelist extends Component{
         })
     }
     _handleDelete = (e) =>{
-        console.log('delete')
-        console.log(e.target.className)
         let id = e.target.className;
         fetch("http://localhost:3001/api/employee/"+ id, {
       method: "DELETE",
@@ -24,7 +23,6 @@ class Employeelist extends Component{
      })
       .then((response) => response.json())
       .then((data) => {
-          console.log("Message:", data)
           fetch('http://localhost:3001/api/employees')
         .then(res => res.json())
         .then(data => {
@@ -38,26 +36,21 @@ class Employeelist extends Component{
       });
   };
     
-    _handleUpdate = (e) =>{
-        console.log('update')
+    _handleUpdateRender = (e) =>{
         let id = e.target.id;
-        console.log(id)
         fetch("http://localhost:3001/api/employee/"+ id)
         .then((response) => response.json())
         .then((data =>{
-                console.log(data.employee[0].emp_name)
                 this.setState({
                     updateStatus:true,
                     employeeToUpdate:data.employee[0]
                 })
-                console.log(this.state)
             })
         )  
     }
 
     _handleEmployeeUpdate = (e) =>{
         e.preventDefault();
-        console.log('update employee')
         let data = {
             address:e.target.emp_address.value,
             phone:e.target.emp_phone.value,
@@ -65,8 +58,6 @@ class Employeelist extends Component{
             email:e.target.emp_email.value
 
         }
-        console.log(e.target.id)
-        console.log(data)
         fetch("http://localhost:3001/api/employee/"+ this.state.employeeToUpdate.emp_id, {
       method: "PUT",
       headers: {
@@ -75,12 +66,20 @@ class Employeelist extends Component{
      })
       .then((response) => response.json())
       .then((data) => {
-          console.log("Message:", data)
+          fetch('http://localhost:3001/api/employees')
+          .then(res => res.json())
+          .then(data => {
+              this.setState({
+                  employees:data.employees
+              })
           
+        })
+        
+          this.setState({
+              updateStatus:false
+          })
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+     
 
     }
     constructor(){
@@ -107,7 +106,7 @@ class Employeelist extends Component{
                             <h4>Salary: {employee.salary}</h4>
                             <h4>Email: {employee.emp_email}</h4>
                         </div>
-                        <button id={employee.emp_id} onClick={this._handleUpdate}>Update</button>
+                        <button id={employee.emp_id} onClick={this._handleUpdateRender}>Update</button>
                         <button className={employee.emp_id} onClick={this._handleDelete}>Delete</button>
                     </div>
                 
@@ -137,9 +136,10 @@ class Employeelist extends Component{
         return(
             <div >
                 <h1>Employee List</h1>
-                <div style={{display:'inline-flex'}}>
+                <Container>
                     {employeeList}
-                </div>
+                </Container>
+                <a href='/admin/profile'>Back to Admin Profile</a>
 
             </div>
         )

@@ -37,7 +37,7 @@ class Adminregister extends Component {
     const { registered } = this.state;
 
     if (registered) {
-      return <Redirect to="/adminlogin" />;
+      return <Redirect to="/admin/profile" />;
     }
     return (
       <div>

@@ -42,7 +42,7 @@ class Employeeregister extends Component {
     const { registered } = this.state;
 
     if (registered) {
-      return <Redirect to="/employee/login" />;
+      return <Redirect to="/admin/profile" />;
     }
     return (
       <div>

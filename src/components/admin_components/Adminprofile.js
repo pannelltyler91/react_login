@@ -31,7 +31,7 @@ class Adminprofile extends Component {
         </div>
         <div>
           <h3>Add</h3>
-        <NavLink to="/client/register"> Add Client</NavLink> |{" "}
+        <NavLink to="/client/add"> Add Client</NavLink> |{" "}
         <NavLink to="/employee/register"> Add Employee</NavLink> |{" "}
         <NavLink to="/admin/register"> Add Admin</NavLink> |{" "}
         </div>

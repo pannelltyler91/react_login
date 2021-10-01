@@ -21,20 +21,18 @@ import Clientlogout from "./components/client_components/clientlogout";
 import Clientprofile from "./components/client_components/clientprofile";
 import Clientregister from "./components/client_components/clientregister";
 import Clientlist from "./components/client_components/clientlist";
+import Clientadd from "./components/client_components/clientadd";
+import Header from "./components/header";
+import Aboutus from "./components/aboutus";
+import Contact from "./components/contactus";
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="navbar">
-        <NavLink to="/admin/login">Admin Login</NavLink> |{" "}
-        <NavLink to="/employee/login"> Employee Login</NavLink> |{" "}
-        <NavLink to="/client/login"> Client Login</NavLink> |{" "}
-        <NavLink to="/client/register"> Client Register</NavLink> |{" "}
-
-        <NavLink to="/employee/register"> Employee Register</NavLink> |{" "}
-        </div>
+        <Header/>
         <Switch>
+          
           <Route path="/admin/login" component={Adminlogin}></Route>
           <Route path="/admin/register" component={Adminregister}></Route>
           <Route path="/admin/profile" component={Adminprofile}></Route>
@@ -50,6 +48,9 @@ class App extends Component {
           <Route path="/client/profile" component={Clientprofile}></Route>
           <Route path="/client/logout" component={Clientlogout}></Route>
           <Route path="/client/list" component={Clientlist}></Route>
+          <Route path="/client/add" component={Clientadd}></Route>
+          <Route path="/aboutus" component={Aboutus}></Route>
+          <Route path="/contactus" component={Contact}></Route>
         </Switch>
       </Router>
     );
