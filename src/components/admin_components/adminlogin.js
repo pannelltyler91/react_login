@@ -1,7 +1,9 @@
 import { React, Component } from "react";
 import { Redirect } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 
-class Login extends Component {
+class Adminlogin extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,7 +16,7 @@ class Login extends Component {
       password: e.target.user_password.value,
       email: e.target.user_email.value,
     };
-    fetch("http://localhost:3001/api/login", {
+    fetch("http://localhost:3001/api/admin/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +25,7 @@ class Login extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Message:", data.isLoggedIn);
+        console.log("Message:", data.isLoggedIn);
         if (data.isLoggedIn) {
           this.setState({ isLoggedIn: true });
         }
@@ -37,27 +39,25 @@ class Login extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/userProfile" />;
+      return <Redirect to="/admin/profile" />;
     }
     return (
       <div>
-        <h2>Login</h2>
-        <div className="form_container">
-          <form onSubmit={this._handleclick}>
+        <h2>Admin Login</h2>
+        <Container>
+          <Form onSubmit={this._handleclick}>
             <h4>Email:</h4>
             <input type="email" name="user_email" id="user_login_email"></input>
             <h4>Password:</h4>
-            <input
-              type="password"
-              name="user_password"
-              id="user_login_password"
-            ></input>
+            <input type="password" name="user_password"id="user_login_password"></input>
+            <br></br>
+            <br></br>
             <input type="submit" id="login_submit" value="Login"></input>
-          </form>
-        </div>
+          </Form>
+          </Container>
       </div>
     );
   }
 }
 
-export default Login;
+export default Adminlogin;
