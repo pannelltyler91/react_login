@@ -8,6 +8,7 @@ class Employeelogin extends Component {
     super();
     this.state = {
       isLoggedIn: false,
+      employeeId:''
     };
   }
   _handleclick = (e) => {
@@ -27,8 +28,9 @@ class Employeelogin extends Component {
       .then((data) => {
         console.log("Message:", data.isLoggedIn);
         if (data.isLoggedIn) {
-          this.setState({ isLoggedIn: true });
+          this.setState({ isLoggedIn: true, employeeId:data.id});
         }
+        
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -39,7 +41,12 @@ class Employeelogin extends Component {
     const { isLoggedIn } = this.state;
 
     if (isLoggedIn) {
-      return <Redirect to="/employee/profile" />;
+      console.log(this.state.employeeId)
+      return <Redirect to={{
+        pathname:'/employee/profile',
+        state:{id:this.state.employeeId}
+        
+      }} />;
     }
     return (
       <div>

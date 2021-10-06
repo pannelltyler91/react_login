@@ -16,6 +16,9 @@ app.use(cors());
 
 //admin routes ---------------------------------
 
+
+// register admin
+
 app.post("/api/admin/register", (req, res) => {
     db.user.findAll({
         where: {
@@ -37,6 +40,8 @@ app.post("/api/admin/register", (req, res) => {
         }
       });
   });
+
+// admin login
 
 app.post("/api/admin/login", (req, res) => {
     // console.log('logged in')
@@ -63,21 +68,25 @@ app.post("/api/admin/login", (req, res) => {
       });
   });
 
+// get all admins
+
 app.get('/api/admins', (req,res) =>{
-    db.clients.findAll().then((clients)=>{
-        console.log(clients)
-        res.json({clients:clients})
+    db.user.findAll().then((admins)=>{
+        console.log(admins)
+        res.json({admins:admins})
     })
 })
+
+//delete one admin
 
 app.delete('/api/admin/:id', (req,res) =>{
     // console.log('route working')
     // console.log(req.params.id)
     // res.json({})
-    db.clients.destroy(
+    db.user.destroy(
         {
             where:{
-                client_email:req.params.id
+                user_email:req.params.id
             }
         }
     ).then((result) =>{
@@ -85,13 +94,14 @@ app.delete('/api/admin/:id', (req,res) =>{
     })
 })
 
+//update one admin
 app.put('/api/admin/:email', (req,res) =>{
     // console.log('route working')
     // console.log(req.params.id)
     // console.log(req.body)
-    db.clients.update({address:req.body.address,phone:req.body.phone,client_email:req.body.email},{
+    db.user.update({user_email:req.body.email},{
         where:{
-            client_email:req.params.email
+            user_email:req.params.email
         }
     }).then((result) =>{
         console.log(result)
@@ -99,6 +109,7 @@ app.put('/api/admin/:email', (req,res) =>{
     })
 })
 
+//get one admin
 app.get('/api/admin/:email', (req,res) =>{
     // console.log('route is working')
     // console.log(req.params.id)
@@ -107,8 +118,8 @@ app.get('/api/admin/:email', (req,res) =>{
         where:{
             user_email:req.params.email
         }
-    }).then((user) =>{
-        res.json({user:user})
+    }).then((admin) =>{
+        res.json({admin:admin})
     })
 })
 
@@ -163,9 +174,10 @@ app.post('/api/employee/login', (req, res) => {
         if (employees.length > 0) {
           let employee = employees[0];
           let passwordHash = employee.emp_password;
+          let id = employees[0].emp_id
   
           if (bcrypt.compareSync(req.body.password, passwordHash)) {
-            res.json({ isLoggedIn: true });
+            res.json({ isLoggedIn: true, id:id });
           } else {
             res.status(403).json({ error: "Password is incorrect", isLoggedIn: false });
           }
@@ -226,6 +238,15 @@ app.delete('/api/employee/:id', (req,res) =>{
     ).then((result) =>{
         res.json({message:result})
     })
+})
+
+
+//employee time routes ------------------------
+
+app.post('/api/employee/clockin/:id', (req,res) =>{
+  console.log(req.body)
+  console.log(req.params.id)
+  res.json({message:'route is working'})
 })
 
 
