@@ -246,9 +246,74 @@ app.delete('/api/employee/:id', (req,res) =>{
 app.post('/api/employee/clockin/:id', (req,res) =>{
   console.log(req.body)
   console.log(req.params.id)
-  res.json({message:'route is working'})
+  
+  const date = req.body.month + 1 + '/' + req.body.dayOfTheMonth + '/' + req.body.year;
+  console.log(date)
+  db.employeeTime.findAll({
+    where:{
+       employee_id: req.params.id ,  
+       date: date 
+    }
+  }).then((employeetime)=>{
+    if(employeetime.length == 0){
+
+      db.employeeTime.create({
+        clockInHour:req.body.hour,
+        clockinMinutes:req.body.minutes,
+        employee_id:req.params.id,
+        date:date,
+        timeStamp:req.body.timeStamp
+    
+    
+      })
+      res.json({message:'Clocked In'})
+    } else{
+      res.status(409).json({message:'Already clocked in for the day'})
+    }
+  })
+  
 })
 
+app.get('/api/employee/time/:id', (req,res) =>{
+  console.log(req.params.id)
+  
+  db.employeeTime.findAll({
+    where:{
+      employee_id:req.params.id
+    }
+  }).then((eTime) =>{
+    console.log(eTime);
+    res.json({message:eTime})
+  })
+})
+
+app.post('/api/employee/clockout/:id', (req,res) =>{
+  console.log(req.body)
+  console.log(req.params.id)
+  const date = req.body.month + 1 + '/' + req.body.dayOfTheMonth + '/' + req.body.year;
+  console.log(date)
+  db.employeeTime.findAll({
+    where:{
+       employee_id: req.params.id ,  
+       date: date 
+    }
+  }).then((employeetime)=>{
+    if(employeetime[0].clockOutHour !== ''){
+      res.json({message:'Employee has already clocked out'})
+    } else{
+      let singleEmployeeTime = employeetime[0]
+      let singleEmployeeTimeDate = singleEmployeeTime.date
+      let singleEmployeeId = singleEmployeeTime.employee_id;
+      db.employeeTime.update({clockOutHour:req.body.hour,clockOutMinutes:req.body.minutes},{
+        where:{
+            employee_id:req.params.id,
+            date:date
+        }
+    })
+      res.json({message:'Clocked Out'})
+    }
+  })
+})
 
 
 //client routes --------------------------------

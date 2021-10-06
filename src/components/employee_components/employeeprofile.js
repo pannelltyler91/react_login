@@ -17,7 +17,7 @@ class Employeeprofile extends Component {
     e.preventDefault();
     console.log(e)
     let timeStamp = new Date()
-    let data = {hour:timeStamp.getHours(),minutes:timeStamp.getMinutes(),month:timeStamp.getMonth(), dayOfTheMonth:timeStamp.getDate()}
+    let data = {hour:timeStamp.getHours(),minutes:timeStamp.getMinutes(),month:timeStamp.getMonth(), dayOfTheMonth:timeStamp.getDate(),year:timeStamp.getFullYear(), timeStamp:timeStamp}
     let empId = this.state.employee.emp_id
     this.setState({
       timeStampIn:timeStamp
@@ -44,9 +44,25 @@ class Employeeprofile extends Component {
     console.log(e)
     let timeStamp = new Date()
     let empId = this.state.employee.emp_id
+    let data = {hour:timeStamp.getHours(),minutes:timeStamp.getMinutes(),month:timeStamp.getMonth(), dayOfTheMonth:timeStamp.getDate(),year:timeStamp.getFullYear(), timeStamp:timeStamp}
     this.setState({
       timeStampOut:timeStamp
     })
+    fetch("http://localhost:3001/api/employee/clockout/" + empId, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message)
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }
   _handleLogout = (e) => {
     this.setState({ loggedIn: false });
