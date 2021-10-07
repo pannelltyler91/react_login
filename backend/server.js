@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./models");
 const bcrypt = require("bcrypt");
 const { useReducer } = require("react");
+const {Op} = require('sequelize')
 
 app.use(express.json());
 app.use(
@@ -243,6 +244,7 @@ app.delete('/api/employee/:id', (req,res) =>{
 
 //employee time routes ------------------------
 
+//single employee clocks in
 app.post('/api/employee/clockin/:id', (req,res) =>{
   console.log(req.body)
   console.log(req.params.id)
@@ -259,7 +261,7 @@ app.post('/api/employee/clockin/:id', (req,res) =>{
 
       db.employeeTime.create({
         clockInHour:req.body.hour,
-        clockinMinutes:req.body.minutes,
+        clockInMinutes:req.body.minutes,
         employee_id:req.params.id,
         date:date,
         timeStamp:req.body.timeStamp
@@ -274,12 +276,20 @@ app.post('/api/employee/clockin/:id', (req,res) =>{
   
 })
 
+//get single employess times for the week
 app.get('/api/employee/time/:id', (req,res) =>{
   console.log(req.params.id)
-  
+  let date = new Date()  
+  let first = date.getDate() - date.getDay(); // First day is the day of the month - the day of the week
+  let last = first + 6; // last day is the first day + 6
+  let firstday = new Date(date.setDate(first));
+  let lastday = new Date(date.setDate(last));
+  console.log(firstday,lastday)
+
   db.employeeTime.findAll({
     where:{
-      employee_id:req.params.id
+      employee_id:req.params.id,
+      timeStamp: {[Op.between] : [firstday , lastday ]}
     }
   }).then((eTime) =>{
     console.log(eTime);
@@ -287,6 +297,7 @@ app.get('/api/employee/time/:id', (req,res) =>{
   })
 })
 
+//single employee clocks out
 app.post('/api/employee/clockout/:id', (req,res) =>{
   console.log(req.body)
   console.log(req.params.id)
@@ -299,8 +310,6 @@ app.post('/api/employee/clockout/:id', (req,res) =>{
     }
   }).then((employeetime)=>{
     if(employeetime[0].clockOutHour !== ''){
-      res.json({message:'Employee has already clocked out'})
-    } else{
       let singleEmployeeTime = employeetime[0]
       let singleEmployeeTimeDate = singleEmployeeTime.date
       let singleEmployeeId = singleEmployeeTime.employee_id;
@@ -311,6 +320,9 @@ app.post('/api/employee/clockout/:id', (req,res) =>{
         }
     })
       res.json({message:'Clocked Out'})
+    } else{
+      res.json({message:'Employee has already clocked out'})
+      
     }
   })
 })
