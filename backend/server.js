@@ -242,7 +242,7 @@ app.delete('/api/employee/:id', (req,res) =>{
 })
 
 
-//employee time routes ------------------------
+//employee time routes ----------------------------
 
 //single employee clocks in
 app.post('/api/employee/clockin/:id', (req,res) =>{

@@ -74,10 +74,11 @@ class Employeeprofile extends Component {
     .then(res => res.json())
     .then(data =>{
       console.log(data.message)
-      this.setState = {
+      this.setState  ({
         employeeTime:data.message,
         timeRecieved:true
-      }
+      })
+      console.log(this.state)
     })
     
   };
@@ -100,9 +101,10 @@ class Employeeprofile extends Component {
 
     let employeeWeekTime = this.state.employeeTime.map((date)=>{
       return(
-        <div>
+        <div style={{border:'3px solid green',width:'300px',display:'inline-block',margin:'5px'}}>
           <h1>{this.state.employee.emp_name}'s Time This Week</h1>
           <div>
+            <h3>{date.date}</h3>
             <h4>ClockIn Time</h4>
             <p>{date.clockInHour}:{date.clockInMinutes}</p>
           </div>
@@ -112,16 +114,12 @@ class Employeeprofile extends Component {
           </div>
           <div>
             <h4>Total Daily Hours</h4>
-            <p>{(((date.clockOutHour * 60) + date.clockOutMinutes) - ((date.clockInHour * 60) + date.clockInMinutes)/60)}</p>
+            <p>{(((date.clockOutHour*60)+ date.clockOutMinutes) - ((date.clockInHour*60)+ date.clockInMinutes) ) /60}</p>
           </div>
         </div>
       )
     })
-    if(this.state.timeRecieved){
-      return(
-        {employeeWeekTime}
-      )
-    }
+    
     const { loggedIn } = this.state;
 
     if (!loggedIn) {
@@ -143,7 +141,7 @@ class Employeeprofile extends Component {
       <div>
           <h2><u>Timesheet</u></h2>
           <button onClick={this._handleTest}>Get This Weeks Time</button>
-          
+          {employeeWeekTime}
 
         </div>
         <button onClick={this._handleLogout}>Log Out</button>
