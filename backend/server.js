@@ -124,6 +124,46 @@ app.get('/api/admin/:email', (req,res) =>{
     })
 })
 
+//schedule routes -------------------------------------
+
+//add clients to that days schedule
+app.post('/api/schedule/add/:date', (req,res) =>{
+  // console.log(req.params.date)
+  // console.log(req.body)
+  // res.json({message:'route is working'})
+  db.schedule.findAll({
+    where:{
+      date:req.params.date.toString(),
+      address:req.body.address
+    }
+  }).then((schedule) =>{
+    if(schedule.length == 0){
+      db.schedule.create({
+        first_name:req.body.first_name,
+        last_name:req.body.last_name,
+        address:req.body.address,
+        date:req.params.date.toString()
+      })
+      res.json({message:'Added to Schedule'})
+    } else{
+      res.status(409).json({message:'Already added to schedule.'})
+    }
+  })
+})
+
+//get all clients for one days schedule
+app.get('/api/schedule/view/:date', (req,res) =>{
+  // console.log(req.params.date)
+  // res.json({message:'route working'})
+  db.schedule.findAll({
+    where:{
+      date:req.params.date.toString()
+    }
+  }).then((schedule) =>{
+    res.json({message:'found schedule',schedule:schedule })
+  })
+})
+
   
 
 

@@ -26,7 +26,8 @@ import Header from "./components/header";
 import Aboutus from "./components/aboutus";
 import Contact from "./components/contactus";
 import Calendarmanager from './components/admin_components/admincalendarmanager';
-import Schedulemanager from './components/admin_components/adminschedulemanager';
+import Scheduleadd from './components/admin_components/adminschedulemanager';
+import Scheduleview from "./components/admin_components/adminscheduleview";
 
 class App extends Component {
   render() {
@@ -54,7 +55,8 @@ class App extends Component {
           <Route path="/aboutus" component={Aboutus}></Route>
           <Route path="/contactus" component={Contact}></Route>
           <Route path="/calendarmanager" component={Calendarmanager}></Route>
-          <Route path="/schedulemanager" component={Schedulemanager}></Route>
+          <Route path="/schedule/add" component={Scheduleadd}></Route>
+          <Route path="/schedule/view" component={Scheduleview}></Route>
         </Switch>
       </Router>
     );
