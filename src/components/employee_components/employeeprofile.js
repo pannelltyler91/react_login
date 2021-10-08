@@ -138,10 +138,13 @@ class Employeeprofile extends Component {
           <input type="button" name='clockOut' value="Clock Out" onClick={this._handleClockOut}></input>
           <h4><i>{this.state.timeStampOut.toString()}</i></h4>
         </div>
-      <div>
+        <div>
           <h2><u>Timesheet</u></h2>
-          <button onClick={this._handleTest}>Get This Weeks Time</button>
+          <button onClick={this._handleTest}>View Timesheet</button>
           {employeeWeekTime}
+        </div>
+        <div>
+          <button>Today's Schedule</button>
 
         </div>
         <button onClick={this._handleLogout}>Log Out</button>

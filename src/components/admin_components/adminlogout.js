@@ -5,7 +5,7 @@ class Adminlogout extends Component {
     return (
       <div>
         <h1>You are logged out!</h1>
-        <a href="/adminlogin">Return to Login</a>
+        <a href="/admin/login">Return to Login</a>
       </div>
     );
   }

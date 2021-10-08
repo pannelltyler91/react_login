@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
+import Calendar from "react-calendar";
 
 class Adminprofile extends Component {
   _handleLogout = (e) => {
@@ -11,7 +11,20 @@ class Adminprofile extends Component {
     super();
     this.state = {
       loggedIn: true,
+      date:new Date(),
+      dateSelected:false
     };
+  }
+
+  _handleCalendarChange = (date) =>{
+    console.log(date);
+    this.setState({
+      dateSelected:true,
+      date:date.toString()
+    })
+    
+    
+    
   }
 
   render() {
@@ -20,6 +33,17 @@ class Adminprofile extends Component {
     if (!loggedIn) {
       return <Redirect to="/admin/logout" />;
     }
+    if(this.state.dateSelected){
+      return(
+        
+          <Redirect to={{
+            pathname:'/calendarmanager',
+            state:{date:this.state.date}
+            
+          }} />
+      )
+    }
+   
     return (
       <div>
         <h1>Admin Profile</h1>
@@ -28,6 +52,9 @@ class Adminprofile extends Component {
         <NavLink to="/client/list"> See All Clients</NavLink> |{" "}
         <NavLink to="/employee/list"> See All Employees</NavLink> |{" "}
         <NavLink to="/admin/list"> See All Admins</NavLink> |{" "}
+        </div>
+        <div style={{width:'800px',margin:'5px'}}>
+          <Calendar onChange={this._handleCalendarChange} />
         </div>
         <div>
           <h3>Add</h3>

@@ -25,6 +25,8 @@ import Clientadd from "./components/client_components/clientadd";
 import Header from "./components/header";
 import Aboutus from "./components/aboutus";
 import Contact from "./components/contactus";
+import Calendarmanager from './components/admin_components/admincalendarmanager';
+import Schedulemanager from './components/admin_components/adminschedulemanager';
 
 class App extends Component {
   render() {
@@ -51,6 +53,8 @@ class App extends Component {
           <Route path="/client/add" component={Clientadd}></Route>
           <Route path="/aboutus" component={Aboutus}></Route>
           <Route path="/contactus" component={Contact}></Route>
+          <Route path="/calendarmanager" component={Calendarmanager}></Route>
+          <Route path="/schedulemanager" component={Schedulemanager}></Route>
         </Switch>
       </Router>
     );

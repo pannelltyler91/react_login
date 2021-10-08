@@ -12,8 +12,7 @@ class Header extends Component {
           <NavLink to="/contactus">Contact Us</NavLink> |{" "}
           <NavLink to="/admin/login">Admin</NavLink> |{" "}
           <NavLink to="/employee/login"> Employee</NavLink> |{" "}
-          <NavLink to="/client/login"> Client Login</NavLink> |{" "}
-          <NavLink to="/client/register"> Client Register</NavLink> |{" "}
+          <NavLink to="/client/login"> Client</NavLink> |{" "}
         </div>
       </div>
     );

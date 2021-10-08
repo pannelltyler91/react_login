@@ -108,6 +108,7 @@ class Employeelist extends Component{
                         </div>
                         <button id={employee.emp_id} onClick={this._handleUpdateRender}>Update</button>
                         <button className={employee.emp_id} onClick={this._handleDelete}>Delete</button>
+                        <button className={employee.emp_id} >View Employee Timesheet</button>
                     </div>
                 
             )
