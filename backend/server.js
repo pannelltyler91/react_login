@@ -164,6 +164,39 @@ app.get('/api/schedule/view/:date', (req,res) =>{
   })
 })
 
+//remove client from daily schedule
+app.delete('/api/schedule/remove/:date', (req, res) =>{
+  console.log(req.params.date)
+  console.log(req.body)
+  db.schedule.destroy({
+    where:{
+      date:req.params.date.toString(),
+      address:req.body.address
+    }
+  }).then((results) =>{
+    res.json({message:'Removed'})
+  })
+})
+
+//pushes client to next day of schedule
+app.put('/api/schedule/push/:date', (req,res) =>{
+  console.log(req.params.date)
+  let date = new Date(req.params.date)
+  let newDay = date.getDate() + 1
+  date.setDate(newDay);
+  console.log(date)
+  console.log(req.body)
+ db.schedule.update({date:date.toString()}, {
+   where:{
+     address:req.body.address,
+     date:req.params.date.toString()
+   }
+ }).then((results) => {
+   res.json({message:'Pushed to Next Day'})
+ })
+
+  
+})
   
 
 

@@ -11,9 +11,9 @@ class Scheduleadd extends Component{
             this.setState({
                 clients:data.clients
             })
-            
         })
     }
+    
     _handleScheduleAddition = (e) =>{
         e.preventDefault();
         console.log(e)
@@ -68,7 +68,7 @@ class Scheduleadd extends Component{
                 <div style={{border:'3px solid green', width:'600px', display:'inline-block',margin:'5px'}}>
                         {clientList}
                 </div>
-                <NavLink to='admin/profile'>Return to Admin Profile</NavLink>
+                <NavLink to='/admin/profile'>Return to Admin Profile</NavLink>
             </div>
         )
     }
