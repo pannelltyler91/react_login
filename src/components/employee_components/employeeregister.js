@@ -47,7 +47,7 @@ class Employeeregister extends Component {
     return (
       <div>
         <div className="title">
-          <h2>Employee Register</h2>
+          <h2>Add Employee</h2>
         </div>
         <Container>
           <Form onSubmit={this._handleclick}>

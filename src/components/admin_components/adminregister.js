@@ -42,7 +42,7 @@ class Adminregister extends Component {
     return (
       <div>
         <div className="title">
-          <h2>Admin Register</h2>
+          <h2>Add Admin </h2>
         </div>
         <Container>
           <Form onSubmit={this._handleclick}>

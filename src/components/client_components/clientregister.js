@@ -48,7 +48,7 @@ class Clientregister extends Component {
     return (
       <div>
         <div className="title">
-          <h2>Client Register</h2>
+          <h2>Add Client</h2>
         </div>
         <Container>
           <Form onSubmit={this._handleclick}>
