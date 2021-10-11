@@ -1,5 +1,6 @@
-import { React, Component } from "react";
+import {Component } from "react";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import Adminregister from "./components/admin_components/adminregister";
 import Adminlogin from "./components/admin_components/adminlogin";
 import {

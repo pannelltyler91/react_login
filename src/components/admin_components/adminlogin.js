@@ -2,6 +2,7 @@ import { React, Component } from "react";
 import { Redirect } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card'
 
 class Adminlogin extends Component {
   constructor() {
@@ -43,17 +44,19 @@ class Adminlogin extends Component {
     }
     return (
       <div>
-        <h2>Admin Login</h2>
         <Container>
-          <Form onSubmit={this._handleclick}>
-            <h4>Email:</h4>
-            <input type="email" name="user_email" id="user_login_email"></input>
-            <h4>Password:</h4>
-            <input type="password" name="user_password"id="user_login_password"></input>
-            <br></br>
-            <br></br>
-            <input type="submit" id="login_submit" value="Login"></input>
-          </Form>
+          <h2>Admin Login</h2>
+          <Card bg='light'>
+            <Form onSubmit={this._handleclick}>
+              <h4>Email:</h4>
+              <input type="email" name="user_email" id="user_login_email"></input>
+              <h4>Password:</h4>
+              <input type="password" name="user_password"id="user_login_password"></input>
+              <br></br>
+              <br></br>
+              <input type="submit" id="login_submit" value="Login"></input>
+            </Form>
+          </Card>
           </Container>
       </div>
     );
