@@ -33,10 +33,11 @@ import Scheduleview from "./components/admin_components/adminscheduleview";
 class App extends Component {
   render() {
     return (
+    <div id='App'>
       <Router>
         <Header/>
+
         <Switch>
-          
           <Route path="/admin/login" component={Adminlogin}></Route>
           <Route path="/admin/register" component={Adminregister}></Route>
           <Route path="/admin/profile" component={Adminprofile}></Route>
@@ -60,6 +61,7 @@ class App extends Component {
           <Route path="/schedule/view" component={Scheduleview}></Route>
         </Switch>
       </Router>
+    </div>
     );
   }
 }

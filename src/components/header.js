@@ -9,7 +9,7 @@ class Header extends Component {
   render() {
     return (
       
-  <Navbar style={{backgroundColor:'#778da9'}}>
+  <Navbar>
     <Container fluid>
     <Navbar.Brand href="#home">Catalyst(SBM)</Navbar.Brand>
     <Nav className="me-auto">
