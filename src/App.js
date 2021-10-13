@@ -29,13 +29,18 @@ import Contact from "./components/contactus";
 import Calendarmanager from './components/admin_components/admincalendarmanager';
 import Scheduleadd from './components/admin_components/adminschedulemanager';
 import Scheduleview from "./components/admin_components/adminscheduleview";
+import Talendar from "./components/calendar";
 
 class App extends Component {
   render() {
     return (
-    <div id='App'>
+    <div id='App' style={{backgroundColor:'#212F45',height:'100vh'}}>
       <Router>
         <Header/>
+        <div id='textBox'>
+          <h1>Catalyst</h1>
+        </div>
+        
 
         <Switch>
           <Route path="/admin/login" component={Adminlogin}></Route>
@@ -59,6 +64,7 @@ class App extends Component {
           <Route path="/calendarmanager" component={Calendarmanager}></Route>
           <Route path="/schedule/add" component={Scheduleadd}></Route>
           <Route path="/schedule/view" component={Scheduleview}></Route>
+          <Route path="/calendar" component={Talendar}></Route>
         </Switch>
       </Router>
     </div>

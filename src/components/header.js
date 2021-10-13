@@ -9,13 +9,13 @@ class Header extends Component {
   render() {
     return (
       
-  <Navbar>
+  <Navbar style={{backgroundColor:'#212F45',marginBottom:'30px'}}>
     <Container fluid>
-    <Navbar.Brand href="#home">Catalyst(SBM)</Navbar.Brand>
-    <Nav className="me-auto">
-      <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/admin/login">Admin</Nav.Link>
-      <Nav.Link href="/employee/login">Employee</Nav.Link>
+    <Navbar.Brand style={{color:'#006466'}} href="#home"><b>Catalyst(SBM)</b></Navbar.Brand>
+    <Nav style={{color:'#006466'}}className="me-auto">
+      <Nav.Link style={{color:'#006466'}} href="/"><b>Home</b></Nav.Link>
+      <Nav.Link style={{color:'#006466'}} href="/admin/login"><b>Admin</b></Nav.Link>
+      <Nav.Link style={{color:'#006466'}} href="/employee/login"><b>Employee</b></Nav.Link>
     </Nav>
     </Container>
   </Navbar>

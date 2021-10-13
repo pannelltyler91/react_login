@@ -1,11 +1,12 @@
 import { Component } from "react";
 import {NavLink} from 'react-router-dom';
 import '../App.css'
+import Card from 'react-bootstrap/Card';
 
 class Sidebar extends Component {
   render() {
     return (
-      <div id='sidebar' style={{height:'94vh',width:'250px', backgroundColor:'rgb(26,179,148)'}}>
+      <Card id='sidebar' style={{height:'85vh',width:'150px', backgroundColor:'rgb(38,57,73)',color:'#006466',border:'2px solid #006466',marginBottom:'35px'}}>
         <h3>Catalyst</h3>
         <div className='sidebarItem'>
         <NavLink to="/admin/list">See All Admins</NavLink>
@@ -25,7 +26,7 @@ class Sidebar extends Component {
         <div className='sidebarItem'>
         <NavLink to="/client/add">Add Client</NavLink>
         </div>
-      </div>
+      </Card>
     );
   }
 }
