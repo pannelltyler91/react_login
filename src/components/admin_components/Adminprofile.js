@@ -33,7 +33,6 @@ class Adminprofile extends Component {
           <h2>Calendar</h2>
         <Talendar/>
         </div>
-        <Button style={{backgroundColor:'#778da9'}} onClick={this._handleLogout}>Log Out</Button>
         
       </div>
     );

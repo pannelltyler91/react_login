@@ -31,7 +31,7 @@ class Talendar extends Component{
           )
         }
         return(
-            <div style={{backgroundColor:'rgb(38,57,73)',width:'75%',height:'75%',display:'block',marginLeft:'175px',marginRight:'50px',marginTop:'45px',border:'3px solid rgb(38,57,73)'}}>
+            <div style={{backgroundColor:'rgb(38,57,73)',width:'75%',height:'75%',display:'block',marginLeft:'115px',marginRight:'50px',marginTop:'10px',border:'3px solid rgb(38,57,73)'}}>
                 <Calendar onChange={this._handleCalendarChange} />
             </div>
             
