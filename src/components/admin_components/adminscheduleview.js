@@ -64,28 +64,30 @@ class Scheduleview extends Component{
             return(
                 <div >
                     
-                    <div style={{border:'3px solid black',margin:'5px', width:'600px'}}>
+                    <div style={{border:'3px solid #006466',margin:'5px', width:'600px',backgroundColor:'rgb(38,57,73)', color:'#006466'}}>
                         <h3 key={client.id}>Name:{client.first_name} {client.last_name}</h3>
                         <h3 key={client.address}>Address:{client.address}</h3>
-                        <form onSubmit={this._handleRemove}>
+                        <div style={{display:'flex'}}>
+                        <form onSubmit={this._handleRemove} style={{margin:'5px'}}>
                         <input type='hidden' name='address' value={client.address}></input>
-                        <input type='submit' value='Remove' ></input>
+                        <input type='submit' value='Remove' style={{backgroundColor:'#212F45',color:'#006466',fontWeight:'bold'}} ></input>
                         </form>
-                        <form onSubmit={this._handlePush}>
+                        <form onSubmit={this._handlePush} style={{margin:'5px',backgroundColor:'#212F45',color:'#006466'}}>
                         <input type='hidden' name='address' value={client.address}></input>
-                        <input type='submit' value='Push to Next Day'></input>   
+                        <input type='submit' value='Push to Next Day' style={{backgroundColor:'#212F45',color:'#006466',fontWeight:'bold'}}></input>                          
                         </form>
+                      </div>
                     </div>
                     
                 </div>
             )
         })
         return(
-            <div>
+            <div style={{color:'#006466'}}>
                 <h1>Schedule View</h1>
                 <h2>{this.props.location.state.date}</h2>
                 {schedule}
-                <NavLink to='/admin/profile'>Return to Admin Profile</NavLink>
+                <NavLink to='/admin/profile' style={{color:'#006466'}}>Return to Admin Profile</NavLink>
             </div>
         )
     }

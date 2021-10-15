@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 
 
 class Employeelist extends Component{
@@ -96,7 +97,7 @@ class Employeelist extends Component{
             return(
                 
 
-                    <div style={{border:'solid 3px green',width:'425px',borderRadius:'5%',padding:'25px',margin:'5px'}}>
+                    <Card style={{display:'flex',border:'solid 3px #006466',width:'25%',padding:'25px',margin:'5px',backgroundColor:'#272640',color:'#006466'}}>
                         <h2><u>Employee Info</u></h2>
                         <h3>Name: {employee.emp_name}</h3>
                         <div className='employeeBody'>
@@ -106,10 +107,12 @@ class Employeelist extends Component{
                             <h4>Salary: {employee.salary}</h4>
                             <h4>Email: {employee.emp_email}</h4>
                         </div>
-                        <button id={employee.emp_id} onClick={this._handleUpdateRender}>Update</button>
-                        <button className={employee.emp_id} onClick={this._handleDelete}>Delete</button>
-                        <button className={employee.emp_id} >View Employee Timesheet</button>
-                    </div>
+                        <div style={{width:'40px',display:'flex'}}>
+                        <button id={employee.emp_id} onClick={this._handleUpdateRender} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Update</button>
+                        <button className={employee.emp_id} onClick={this._handleDelete} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Delete</button>
+                        <button className={employee.emp_id} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Timesheet</button>
+                        </div>
+                    </Card>
                 
             )
         })
@@ -117,7 +120,7 @@ class Employeelist extends Component{
         if(this.state.updateStatus){
             return(
                 <div>                                       
-                    <h3>{this.state.employeeToUpdate.emp_name}</h3>
+                   <h3>{this.state.employeeToUpdate.emp_name}</h3>
                     <form onSubmit={this._handleEmployeeUpdate}>  
                         <h4>Address:</h4>
                         <input type="text" defaultValue={this.state.employeeToUpdate.address} name="emp_address"></input>
@@ -135,14 +138,14 @@ class Employeelist extends Component{
             )
         }
         return(
-            <div >
-                <h1>Employee List</h1>
-                <Container>
+    <Container style={{marginLeft:'5px',display:'flex-box'}}>
+                <h1 style={{color:'#006466',marginBottom:'5px',marginLeft:'5px'}}>Employee List</h1>
+                
                     {employeeList}
-                </Container>
-                <a href='/admin/profile'>Back to Admin Profile</a>
+                
+                <a href='/admin/profile' style={{color:'#006466'}}>Back to Admin Profile</a>
 
-            </div>
+            </Container>
         )
     }
 }

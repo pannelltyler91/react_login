@@ -18,7 +18,7 @@
 #textBox h1{
     font-size: 150px;
     line-height: 160px;
-    margin-left:-10px;
+    margin-left:-50px;
     color:transparent;
     -webkit-text-stroke: 2px rgb(38,57,73);
     background:url('./cool.PNG');
@@ -49,5 +49,3 @@
     border: 1px solid #006466;
 
 }
-
-

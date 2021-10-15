@@ -51,16 +51,16 @@ class Employeelogin extends Component {
     return (
       <div>
         <Container>
-        <h2>Employee Login</h2>
-          <Card bg='light'>
+          <h2 style={{color:'rgb(26,179,148)'}}>Employee Login</h2>
+          <Card style={{backgroundColor:'rgb(38,57,73)',color:'rgb(26,179,148)',border:'2px solid rgb(26,179,148) '}}>
             <Form onSubmit={this._handleclick}>
               <h4>Email:</h4>
-              <input type="email" name="user_email" ></input>
+              <input type="email" name="user_email" id="user_login_email"></input>
               <h4>Password:</h4>
-              <input type="password" name="user_password"></input>
+              <input type="password" name="user_password"id="user_login_password"></input>
               <br></br>
               <br></br>
-              <input type="submit" id="login_submit" value="Login"></input>
+              <input style={{backgroundColor:'white',color:'rgb(38,57,73)'}}type="submit" id="login_submit" value="Login"></input>
             </Form>
           </Card>
           </Container>

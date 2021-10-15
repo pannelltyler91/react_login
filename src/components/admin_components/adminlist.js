@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 
 
 class Adminlist extends Component{
@@ -93,15 +94,17 @@ class Adminlist extends Component{
             return(
                 
 
-                    <div style={{border:'solid 3px green',width:'425px',borderRadius:'5%',padding:'25px',margin:'5px'}}>
+                    <Card style={{display:'flex',border:'solid 3px #006466',width:'25%',padding:'25px',margin:'5px',backgroundColor:'#272640',color:'#006466'}}>
                         <h2><u>Admin Info</u></h2>
                         <h3>Admin: {admin.user_email}</h3>
                         <div className='adminBody'>
                             <h4>Email: {admin.user_email}</h4>
                         </div>
-                        <button id={admin.user_email} onClick={this._handleUpdateRender}>Update</button>
-                        <button className={admin.user_email} onClick={this._handleDelete}>Delete</button>
-                    </div>
+                        <div style={{width:'40px',display:'flex'}}>
+                        <button id={admin.user_email} onClick={this._handleUpdateRender} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Update</button>
+                        <button className={admin.user_email} onClick={this._handleDelete} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Delete</button>
+                        </div>
+                    </Card>
                 
             )
         })
@@ -121,12 +124,12 @@ class Adminlist extends Component{
             )
         }
         return(
-            <div >
-                <h1>Admin List</h1>
-                <Container>
+            <div style={{height:'100vh'}}>
+                <h1 style={{color:'#006466',marginBottom:'5px',marginLeft:'5px'}}>Admin List</h1>
+                
                     {adminList}
-                </Container>
-                <a href='/admin/profile'>Back to Admin Profile</a>
+               
+                <a href='/admin/profile'style={{color:'#006466'}}>Back to Admin Profile</a>
 
             </div>
         )

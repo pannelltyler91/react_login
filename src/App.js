@@ -23,22 +23,41 @@ import Clientprofile from "./components/client_components/clientprofile";
 import Clientregister from "./components/client_components/clientregister";
 import Clientlist from "./components/client_components/clientlist";
 import Clientadd from "./components/client_components/clientadd";
-import Header from "./components/header";
 import Aboutus from "./components/aboutus";
 import Contact from "./components/contactus";
 import Calendarmanager from "./components/admin_components/admincalendarmanager";
 import Scheduleadd from "./components/admin_components/adminschedulemanager";
 import Scheduleview from "./components/admin_components/adminscheduleview";
 import Talendar from "./components/calendar";
+import Navbar from "react-bootstrap/navbar";
+import Container from "react-bootstrap/container";
+import Nav from "react-bootstrap/nav";
 
 class App extends Component {
   render() {
     return (
       <div id="App" style={{ backgroundColor: "#212F45", height: "100vh" }}>
         <Router>
-          <Header />
+          <Navbar style={{ backgroundColor: "#212F45", marginBottom: "30px" }}>
+            <Container fluid>
+              <Navbar.Brand style={{ color: "#006466" }} href="#home">
+                <b>Catalyst 1.0 (SBM)</b>
+              </Navbar.Brand>
+              <Nav style={{ color: "#006466" }} className="me-auto">
+                <Nav.Link style={{ color: "#006466" }} href="/">
+                  <b>Home</b>
+                </Nav.Link>
+                <Nav.Link style={{ color: "#006466" }} href="/admin/login">
+                  <b>Admin</b>
+                </Nav.Link>
+                <Nav.Link style={{ color: "#006466" }} href="/employee/login">
+                  <b>Employee</b>
+                </Nav.Link>
+              </Nav>
+            </Container>
+          </Navbar>
           <div id="textBox">
-            <h1>Catalyst</h1>
+            <h1>Catalyst 1.0</h1>
           </div>
 
           <Switch>
@@ -48,7 +67,10 @@ class App extends Component {
             <Route path="/admin/logout" component={Adminlogout}></Route>
             <Route path="/admin/list" component={Adminlist}></Route>
             <Route path="/employee/login" component={Employeelogin}></Route>
-            <Route path="/employee/register"component={Employeeregister}></Route>
+            <Route
+              path="/employee/register"
+              component={Employeeregister}
+            ></Route>
             <Route path="/employee/profile" component={Employeeprofile}></Route>
             <Route path="/employee/logout" component={Employeelogout}></Route>
             <Route path="/employee/list" component={Employeelist}></Route>

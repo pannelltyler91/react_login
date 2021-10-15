@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card'
+import "../add.css"
 
 class Employeeregister extends Component {
   constructor() {
@@ -45,11 +47,9 @@ class Employeeregister extends Component {
       return <Redirect to="/admin/profile" />;
     }
     return (
-      <div>
-        <div className="title">
+      <div className='addBox'>
+        <Card className='addCard'>
           <h2>Add Employee</h2>
-        </div>
-        <Container>
           <Form onSubmit={this._handleclick}>
             <h4>Email:</h4>
             <Form.Control type="email" name="user_email" ></Form.Control>
@@ -67,9 +67,9 @@ class Employeeregister extends Component {
             <input type="number" name="user_salary"></input>
             <br></br>
             <br></br>
-            <Button variant="primary" type="submit">Register</Button>
+            <Button className='addButton' variant="primary" type="submit">Add</Button>
           </Form>
-        </Container>
+        </Card>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 
 
 class Clientlist extends Component{
@@ -95,24 +96,28 @@ class Clientlist extends Component{
             return(
                 
 
-                    <div style={{border:'solid 3px green',width:'425px',borderRadius:'5%',padding:'25px',margin:'5px'}}>
-                        <h2><u>Client Info</u></h2>
-                        <h3>Name: {client.first_name} {client.last_name}</h3>
-                        <div className='clientBody'>
-                            <h4>Address: {client.address}</h4>
-                            <h4>Phone: {client.phone}</h4>
-                            <h4>Email: {client.client_email}</h4>
-                        </div>
-                        <button id={client.client_email} onClick={this._handleUpdateRender}>Update</button>
-                        <button className={client.client_email} onClick={this._handleDelete}>Delete</button>
-                    </div>
+                    
+                        <Card style={{display:'flex',border:'solid 3px #006466',width:'25%',padding:'25px',margin:'5px',backgroundColor:'#272640',color:'#006466'}}>
+                            <h2><u>Client Info</u></h2>
+                            <h3>Name: {client.first_name} {client.last_name}</h3>
+                            <div className='clientBody'>
+                                <h4>Address: {client.address}</h4>
+                                <h4>Phone: {client.phone}</h4>
+                                <h4>Email: {client.client_email}</h4>
+                            </div>
+                            <div style={{width:'40px',display:'flex'}}>
+                            <button id={client.client_email} onClick={this._handleUpdateRender} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Update</button>
+                            <button className={client.client_email} onClick={this._handleDelete} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Delete</button>
+                            </div>
+                        </Card>
+                    
                 
             )
         })
 
         if(this.state.updateStatus){
             return(
-                <div>                                       
+                <Card style={{display:'flex',border:'solid 3px #006466',width:'15%',padding:'25px',margin:'5px',backgroundColor:'#272640',color:'#006466'}}>                                       
                     <h3>{this.state.clientToUpdate.first_name} {this.state.clientToUpdate.last_name}</h3>
                     <form onSubmit={this._handleClientUpdate}>  
                         <h4>Address:</h4>
@@ -125,16 +130,16 @@ class Clientlist extends Component{
                         <br></br>
                         <input type="submit" value="Update" id={this.state.clientToUpdate.client_email}></input>
                     </form>
-                </div>
+                </Card>
             )
         }
         return(
-            <div >
-                <h1>Client List</h1>
-                <Container>
+            <div style={{height:'100vh'}}>
+                <h1 style={{color:'#006466',marginBottom:'5px',marginLeft:'5px'}}><u>Client List</u></h1>
+                
                     {clientList}
-                </Container>
-                <a href='/admin/profile'>Back to Admin Profile</a>
+                
+                <a href='/admin/profile' style={{color:'#006466'}}>Back to Admin Profile</a>
 
             </div>
         )
