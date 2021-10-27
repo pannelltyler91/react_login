@@ -49,7 +49,20 @@ class Employeelist extends Component{
             })
         )  
     }
-
+    _handleTimesheetRender = (e) => {
+        console.log(e.target.className)
+        fetch('http://localhost:3001/api/employee/time/'+ e.target.className)
+        .then(res => res.json())
+        .then(data =>{
+          console.log(data.message)
+          this.setState  ({
+            employeeTime:data.message,
+            timeRecieved:true
+          })
+          console.log(this.state)
+        })
+        
+      };
     _handleEmployeeUpdate = (e) =>{
         e.preventDefault();
         let data = {
@@ -83,16 +96,38 @@ class Employeelist extends Component{
      
 
     }
-    constructor(){
+       constructor(){
         super()
             this.state ={
                 employees:[],
                 updateStatus:false,
-                employeeToUpdate:[]
+                employeeToUpdate:[],
+                employeeTime:[],
+                timeReceived:false
             }
         
     }
     render(){
+        let employeeWeekTime = this.state.employeeTime.map((date)=>{
+            return(
+              <div style={{border:'3px solid green',width:'300px',display:'inline-block',margin:'5px'}}>
+                <h1>'s Time This Week</h1>
+                <div>
+                  <h3>{date.date}</h3>
+                  <h4>ClockIn Time</h4>
+                  <p>{date.clockInHour}:{date.clockInMinutes}</p>
+                </div>
+                <div>
+                  <h4>ClockOut Time</h4>
+                  <p>{date.clockOutHour}:{date.clockOutMinutes}</p>
+                </div>
+                <div>
+                  <h4>Total Daily Hours</h4>
+                  <p>{(((date.clockOutHour*60)+ date.clockOutMinutes) - ((date.clockInHour*60)+ date.clockInMinutes) ) /60}</p>
+                </div>
+              </div>
+            )
+          })
         let employeeList = this.state.employees.map((employee) =>{
             return(
                 
@@ -110,7 +145,7 @@ class Employeelist extends Component{
                         <div style={{width:'40px',display:'flex'}}>
                         <button id={employee.emp_id} onClick={this._handleUpdateRender} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Update</button>
                         <button className={employee.emp_id} onClick={this._handleDelete} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Delete</button>
-                        <button className={employee.emp_id} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Timesheet</button>
+                        <button className={employee.emp_id} onClick={this._handleTimesheetRender} style={{backgroundColor:'#006466',color:'#212F45',margin:'5px',fontWeight:'bold'}}>Timesheet</button>
                         </div>
                     </Card>
                 
@@ -134,6 +169,13 @@ class Employeelist extends Component{
                         <br></br>
                         <input type="submit" value="Update" id={this.state.employeeToUpdate.emp_id}></input>
                     </form>
+                </div>
+            )
+        }
+        if(this.state.timeReceived){
+            return(
+                <div>
+                    {employeeWeekTime}
                 </div>
             )
         }
